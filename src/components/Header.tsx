@@ -19,14 +19,14 @@ export default function Header() {
               <div className="relative w-[86px] h-[86px] sm:w-[108px] sm:h-[108px]">
                 <Image
                   src="/tutton_hughes_logo.png"
-                  alt="Tutton & Hughes Auto Sales Logo"
+                  alt="Tutton Hughes Auto Sales Logo"
                   fill
                   className="object-contain"
                   priority
                 />
               </div>
               <div className="hidden sm:block">
-                <h1 className="text-2xl font-black uppercase tracking-wider text-yellow-gold leading-none mb-1">Tutton & Hughes</h1>
+                <h1 className="text-2xl font-black uppercase tracking-wider text-yellow-gold leading-none mb-1">Tutton Hughes</h1>
                 <p className="text-base font-medium tracking-wide leading-none opacity-80">Auto Sales LLC</p>
               </div>
             </Link>

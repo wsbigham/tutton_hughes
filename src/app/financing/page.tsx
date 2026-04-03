@@ -8,7 +8,7 @@ export default function FinancingPage() {
           <h1 className="text-4xl md:text-5xl font-extrabold text-midnight-blue uppercase mb-4">Financing Options</h1>
           <div className="w-24 h-1 bg-yellow-gold mx-auto mb-6"></div>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            At Tutton & Hughes Auto Sales, we believe everyone deserves a reliable vehicle. We offer flexible financing solutions tailored to your needs.
+            At Tutton Hughes Auto Sales, we believe everyone deserves a reliable vehicle. We offer flexible financing solutions tailored to your needs.
           </p>
         </div>
 

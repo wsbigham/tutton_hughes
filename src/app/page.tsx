@@ -16,7 +16,7 @@ export default function Home() {
               Find Your Perfect <span className="text-yellow-gold">Pre-Owned Vehicle</span> Today
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl">
-              Quality cars, transparent pricing, and exceptional customer service right here in Jasper, GA. Explore our latest inventory and drive home happy.
+              Quality cars, transparent pricing, and exceptional customer service right here in Summerville, GA. Explore our latest inventory and drive home happy.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link 
@@ -120,7 +120,7 @@ export default function Home() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Why Choose Tutton & Hughes?</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Why Choose Tutton Hughes?</h2>
             <div className="w-24 h-1 bg-yellow-gold mx-auto"></div>
           </div>
           
@@ -146,7 +146,7 @@ export default function Home() {
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
               </div>
               <h3 className="text-xl font-bold mb-2">Local & Trusted</h3>
-              <p className="text-gray-600">Proudly serving Jasper and surrounding communities with honesty, integrity, and exceptional service.</p>
+              <p className="text-gray-600">Proudly serving Summerville and surrounding communities with honesty, integrity, and exceptional service.</p>
             </div>
           </div>
         </div>

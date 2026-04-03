@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Tutton & Hughes Auto Sales | Jasper, GA",
-  description: "Quality pre-owned vehicles and auto sales at Tutton & Hughes Auto Sales LLC in Jasper, Georgia.",
+  title: "Tutton Hughes Auto Sales | Summerville, GA",
+  description: "Quality pre-owned vehicles and auto sales at Tutton Hughes Auto Sales LLC in Summerville, Georgia.",
 };
 
 export default function RootLayout({

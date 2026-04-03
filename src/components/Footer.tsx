@@ -6,13 +6,13 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Dealership Info */}
         <div>
-          <h3 className="text-xl font-bold text-yellow-gold mb-4 uppercase">Tutton & Hughes Auto Sales</h3>
+          <h3 className="text-xl font-bold text-yellow-gold mb-4 uppercase">Tutton Hughes Auto Sales</h3>
           <p className="mb-2 text-gray-300">12940 US-27<br/>Summerville, GA 30747</p>
           <p className="mb-4 text-gray-300">
             <a href="tel:7068080110" className="hover:text-yellow-gold transition-colors">(706) 808-0110</a>
           </p>
           <p className="text-sm text-gray-400">
-            Providing quality pre-owned vehicles and excellent service to Jasper and the surrounding communities.
+            Providing quality pre-owned vehicles and excellent service to Summerville and the surrounding communities.
           </p>
         </div>
 
@@ -39,7 +39,7 @@ export default function Footer() {
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8 border-t border-gray-700 text-center text-gray-400 text-sm">
-        <p>&copy; {new Date().getFullYear()} Tutton & Hughes Auto Sales LLC. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Tutton Hughes Auto Sales LLC. All rights reserved.</p>
       </div>
     </footer>
   );
