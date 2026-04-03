@@ -2,6 +2,7 @@
 
 import { useAuth } from "@/hooks/useAuth";
 import { useVehicles, Vehicle } from "@/hooks/useVehicles";
+import { useSettings } from "@/hooks/useSettings";
 import { db, auth } from "@/lib/firebase";
 import { doc, deleteDoc } from "firebase/firestore";
 import { signOut } from "firebase/auth";
@@ -11,6 +12,7 @@ import { useState } from "react";
 export default function AdminDashboard() {
   const { user, loading: authLoading } = useAuth();
   const { vehicles, loading: vehiclesLoading, error } = useVehicles();
+  const { settings, loading: settingsLoading, updateSettings } = useSettings();
   const [isDeleting, setIsDeleting] = useState<string | null>(null);
 
   const handleLogout = async () => {
@@ -22,7 +24,6 @@ export default function AdminDashboard() {
     setIsDeleting(id);
     try {
       await deleteDoc(doc(db, "vehicles", id));
-      // In a real app, you'd trigger a re-fetch or update state
       window.location.reload(); 
     } catch (err) {
       console.error("Error deleting vehicle:", err);
@@ -32,7 +33,7 @@ export default function AdminDashboard() {
     }
   };
 
-  if (authLoading || vehiclesLoading) {
+  if (authLoading || vehiclesLoading || settingsLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-midnight-blue"></div>
@@ -61,6 +62,37 @@ export default function AdminDashboard() {
             >
               Logout
             </button>
+          </div>
+        </div>
+
+        {/* Global Settings Section */}
+        <div className="bg-white p-6 rounded-lg shadow-sm mb-8 border-t-4 border-midnight-blue">
+          <h2 className="text-xl font-bold text-midnight-blue mb-4 uppercase tracking-widest">Storefront Settings</h2>
+          <div className="mb-4">
+            <label className="block text-sm font-bold text-gray-700 mb-3">Allowed Statuses for Homepage Featured Section</label>
+            <div className="flex gap-6">
+              {["available", "pending", "sold"].map((status) => (
+                <label key={status} className="flex items-center gap-2 cursor-pointer">
+                  <input 
+                    type="checkbox" 
+                    checked={settings.featuredStatuses.includes(status)}
+                    onChange={async (e) => {
+                      const isChecked = e.target.checked;
+                      let newStatuses = [...settings.featuredStatuses];
+                      if (isChecked) {
+                        newStatuses.push(status);
+                      } else {
+                        newStatuses = newStatuses.filter(s => s !== status);
+                      }
+                      await updateSettings({ featuredStatuses: newStatuses });
+                    }}
+                    className="w-5 h-5 accent-midnight-blue cursor-pointer"
+                  />
+                  <span className="capitalize font-medium text-gray-700">{status}</span>
+                </label>
+              ))}
+            </div>
+            <p className="text-gray-400 text-sm mt-2">Check the boxes to include vehicles with these statuses in the Featured Vehicles section on the home page.</p>
           </div>
         </div>
 

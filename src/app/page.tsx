@@ -3,11 +3,18 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useVehicles } from "@/hooks/useVehicles";
+import { useSettings } from "@/hooks/useSettings";
 
 export default function Home() {
-  const { vehicles, loading } = useVehicles();
-  const featuredVehicles = vehicles.filter(v => v.featured).slice(0, 3);
-  const displayVehicles = featuredVehicles.length > 0 ? featuredVehicles : vehicles.slice(0, 3);
+  const { vehicles, loading: vehiclesLoading } = useVehicles();
+  const { settings, loading: settingsLoading } = useSettings();
+  
+  const loading = vehiclesLoading || settingsLoading;
+  
+  // Only consider vehicles whose status is allowed by the admin settings
+  const eligibleVehicles = vehicles.filter(v => settings.featuredStatuses.includes(v.status));
+  const featuredVehicles = eligibleVehicles.filter(v => v.featured).slice(0, 3);
+  const displayVehicles = featuredVehicles.length > 0 ? featuredVehicles : eligibleVehicles.slice(0, 3);
 
   return (
     <div className="flex flex-col min-h-screen">
