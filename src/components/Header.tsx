@@ -12,11 +12,11 @@ export default function Header() {
   return (
     <header className="bg-midnight-blue text-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-28 sm:h-32">
+        <div className="flex justify-between items-center h-36 sm:h-44">
           {/* Logo Area */}
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="flex items-center gap-4">
-              <div className="relative w-[86px] h-[86px] sm:w-[108px] sm:h-[108px]">
+              <div className="relative w-[120px] h-[120px] sm:w-[151px] sm:h-[151px]">
                 <Image
                   src="/tutton_hughes_logo.png"
                   alt="Tutton Hughes Auto Sales Logo"
