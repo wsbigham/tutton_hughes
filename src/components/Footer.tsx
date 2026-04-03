@@ -7,9 +7,9 @@ export default function Footer() {
         {/* Dealership Info */}
         <div>
           <h3 className="text-xl font-bold text-yellow-gold mb-4 uppercase">Tutton & Hughes Auto Sales</h3>
-          <p className="mb-2 text-gray-300">100 Liberty Ln<br/>Jasper, GA 30143</p>
+          <p className="mb-2 text-gray-300">1050 Highway 515 S<br/>Jasper, GA 30143</p>
           <p className="mb-4 text-gray-300">
-            <a href="tel:7062532277" className="hover:text-yellow-gold transition-colors">(706) 253-2277</a>
+            <a href="tel:4706491117" className="hover:text-yellow-gold transition-colors">(470) 649-1117</a>
           </p>
           <p className="text-sm text-gray-400">
             Providing quality pre-owned vehicles and excellent service to Jasper and the surrounding communities.
@@ -31,8 +31,8 @@ export default function Footer() {
         <div>
           <h3 className="text-xl font-bold text-yellow-gold mb-4 uppercase">Business Hours</h3>
           <ul className="space-y-2 text-gray-300">
-            <li className="flex justify-between"><span>Mon - Fri:</span> <span>9:00 AM - 6:00 PM</span></li>
-            <li className="flex justify-between"><span>Saturday:</span> <span>9:00 AM - 4:00 PM</span></li>
+            <li className="flex justify-between"><span>Mon - Fri:</span> <span>9:00 AM - 7:00 PM</span></li>
+            <li className="flex justify-between"><span>Saturday:</span> <span>9:00 AM - 6:00 PM</span></li>
             <li className="flex justify-between"><span>Sunday:</span> <span>Closed</span></li>
           </ul>
         </div>

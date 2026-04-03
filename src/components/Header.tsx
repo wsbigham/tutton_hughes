@@ -51,10 +51,10 @@ export default function Header() {
           {/* Contact CTA */}
           <div className="hidden lg:flex items-center">
             <a
-              href="tel:7062532277"
+              href="tel:4706491117"
               className="bg-yellow-gold text-midnight-blue hover:bg-gold-hover px-6 py-3 rounded-md font-black transition-all shadow-md active:transform active:scale-95"
             >
-              (706) 253-2277
+              (470) 649-1117
             </a>
           </div>
 
@@ -110,10 +110,10 @@ export default function Header() {
             </Link>
             <div className="pt-4 pb-2 px-3">
               <a
-                href="tel:7062532277"
+                href="tel:4706491117"
                 className="block w-full text-center bg-yellow-gold text-midnight-blue py-4 rounded-md font-black shadow-lg"
               >
-                CALL: (706) 253-2277
+                CALL: (470) 649-1117
               </a>
             </div>
           </div>

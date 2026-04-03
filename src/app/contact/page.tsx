@@ -56,7 +56,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="font-bold text-midnight-blue">Our Location</p>
-                    <p className="text-gray-600">100 Liberty Ln, Jasper, GA 30143</p>
+                    <p className="text-gray-600">1050 Highway 515 S, Jasper, GA 30143</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -65,7 +65,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="font-bold text-midnight-blue">Phone Number</p>
-                    <a href="tel:7062532277" className="text-gray-600 hover:text-midnight-blue">(706) 253-2277</a>
+                    <a href="tel:4706491117" className="text-gray-600 hover:text-midnight-blue">(470) 649-1117</a>
                   </div>
                 </div>
               </div>
@@ -76,11 +76,11 @@ export default function ContactPage() {
               <ul className="space-y-3">
                 <li className="flex justify-between border-b border-gray-100 pb-2 text-gray-600 font-medium">
                   <span>Monday - Friday</span>
-                  <span className="text-midnight-blue">9:00 AM - 6:00 PM</span>
+                  <span className="text-midnight-blue">9:00 AM - 7:00 PM</span>
                 </li>
                 <li className="flex justify-between border-b border-gray-100 pb-2 text-gray-600 font-medium">
                   <span>Saturday</span>
-                  <span className="text-midnight-blue">9:00 AM - 4:00 PM</span>
+                  <span className="text-midnight-blue">9:00 AM - 6:00 PM</span>
                 </li>
                 <li className="flex justify-between text-gray-400 font-medium">
                   <span>Sunday</span>
@@ -89,11 +89,17 @@ export default function ContactPage() {
               </ul>
             </div>
 
-            {/* Map Placeholder */}
-            <div className="h-64 bg-gray-300 rounded-xl overflow-hidden relative shadow-md">
-               <div className="absolute inset-0 flex items-center justify-center text-gray-600 font-bold bg-gray-200">
-                  [Google Maps Embed: 100 Liberty Ln, Jasper, GA]
-               </div>
+            {/* Google Map */}
+            <div className="h-80 bg-gray-300 rounded-xl overflow-hidden relative shadow-md">
+               <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3301.685325852934!2d-84.45524302341996!3d34.460144572998855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f561769733c30d%3A0xe5a3c98d67c9c30!2s1050%20Hwy%20515%20S%2C%20Jasper%2C%20GA%2030143!5e0!3m2!1sen!2sus!4v1712110000000!5m2!1sen!2sus" 
+                width="100%" 
+                height="100%" 
+                style={{ border: 0 }} 
+                allowFullScreen={true} 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
             </div>
           </div>
 
