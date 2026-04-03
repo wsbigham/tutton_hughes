@@ -182,10 +182,10 @@ export default function ContactPage() {
                     id="message"
                     name="message"
                     required
-                    rows={5}
+                    rows={3}
                     value={formData.message}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-100 rounded-lg focus:border-yellow-gold focus:outline-none transition-colors resize-none"
+                    className="w-full px-4 pt-3 pb-2 border-2 border-gray-100 rounded-lg focus:border-yellow-gold focus:outline-none transition-colors resize-none"
                     placeholder="Tell us how we can help you..."
                   ></textarea>
                 </div>
