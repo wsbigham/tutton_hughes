@@ -56,7 +56,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="font-bold text-midnight-blue">Our Location</p>
-                    <p className="text-gray-600">1050 Highway 515 S, Jasper, GA 30143</p>
+                    <p className="text-gray-600">12940 US-27, Summerville, GA 30747</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -65,7 +65,16 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="font-bold text-midnight-blue">Phone Number</p>
-                    <a href="tel:4706491117" className="text-gray-600 hover:text-midnight-blue">(470) 649-1117</a>
+                    <a href="tel:7068080110" className="text-gray-600 hover:text-midnight-blue">(706) 808-0110</a>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="bg-midnight-blue p-3 rounded-lg text-yellow-gold">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                  </div>
+                  <div>
+                    <p className="font-bold text-midnight-blue">Email Us</p>
+                    <a href="mailto:nick@thasales.com" className="text-gray-600 hover:text-midnight-blue">nick@thasales.com</a>
                   </div>
                 </div>
               </div>
@@ -76,11 +85,11 @@ export default function ContactPage() {
               <ul className="space-y-3">
                 <li className="flex justify-between border-b border-gray-100 pb-2 text-gray-600 font-medium">
                   <span>Monday - Friday</span>
-                  <span className="text-midnight-blue">9:00 AM - 7:00 PM</span>
+                  <span className="text-midnight-blue">9:00 AM - 6:00 PM</span>
                 </li>
                 <li className="flex justify-between border-b border-gray-100 pb-2 text-gray-600 font-medium">
                   <span>Saturday</span>
-                  <span className="text-midnight-blue">9:00 AM - 6:00 PM</span>
+                  <span className="text-midnight-blue">9:00 AM - 4:00 PM</span>
                 </li>
                 <li className="flex justify-between text-gray-400 font-medium">
                   <span>Sunday</span>
@@ -92,7 +101,7 @@ export default function ContactPage() {
             {/* Google Map */}
             <div className="h-80 bg-gray-300 rounded-xl overflow-hidden relative shadow-md">
                <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3301.685325852934!2d-84.45524302341996!3d34.460144572998855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f561769733c30d%3A0xe5a3c98d67c9c30!2s1050%20Hwy%20515%20S%2C%20Jasper%2C%20GA%2030143!5e0!3m2!1sen!2sus!4v1712110000000!5m2!1sen!2sus" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.144414436856!2d-85.35122142339591!3d34.60055557295804!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x886026a76c8c9985%3A0x6b776c533967d3!2s12940%20US-27%2C%20Summerville%2C%20GA%2030747!5e0!3m2!1sen!2sus!4v1712110000000!5m2!1sen!2sus" 
                 width="100%" 
                 height="100%" 
                 style={{ border: 0 }} 

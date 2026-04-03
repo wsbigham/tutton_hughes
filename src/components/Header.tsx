@@ -110,10 +110,10 @@ export default function Header() {
             </Link>
             <div className="pt-4 pb-2 px-3">
               <a
-                href="tel:4706491117"
+                href="tel:7068080110"
                 className="block w-full text-center bg-yellow-gold text-midnight-blue py-4 rounded-md font-black shadow-lg"
               >
-                CALL: (470) 649-1117
+                CALL: (706) 808-0110
               </a>
             </div>
           </div>
