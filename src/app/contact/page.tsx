@@ -84,12 +84,16 @@ export default function ContactPage() {
               <h2 className="text-2xl font-bold text-midnight-blue mb-6">Business Hours</h2>
               <ul className="space-y-3">
                 <li className="flex justify-between border-b border-gray-100 pb-2 text-gray-600 font-medium">
-                  <span>Monday - Friday</span>
-                  <span className="text-midnight-blue">9:00 AM - 6:00 PM</span>
+                  <span>Mon - Tue</span>
+                  <span className="text-midnight-blue">10:00 AM - 6:00 PM</span>
+                </li>
+                <li className="flex justify-between border-b border-gray-100 pb-2 text-gray-400 font-medium">
+                  <span>Wednesday</span>
+                  <span className="text-midnight-blue">Closed</span>
                 </li>
                 <li className="flex justify-between border-b border-gray-100 pb-2 text-gray-600 font-medium">
-                  <span>Saturday</span>
-                  <span className="text-midnight-blue">9:00 AM - 4:00 PM</span>
+                  <span>Thu - Sat</span>
+                  <span className="text-midnight-blue">10:00 AM - 6:00 PM</span>
                 </li>
                 <li className="flex justify-between text-gray-400 font-medium">
                   <span>Sunday</span>
