@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -7,17 +6,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Dealership Info */}
         <div>
-          <div className="flex items-center gap-4 mb-4">
-            <div className="relative w-24 h-24 shrink-0">
-              <Image
-                src="/tutton_hughes_logo.png"
-                alt="Tutton Hughes Auto Sales Logo"
-                fill
-                className="object-contain"
-              />
-            </div>
-            <h3 className="text-xl font-bold text-yellow-gold uppercase">Tutton Hughes Auto Sales</h3>
-          </div>
+          <h3 className="text-xl font-bold text-yellow-gold mb-4 uppercase">Tutton Hughes Auto Sales</h3>
           <p className="mb-2 text-gray-300">12940 US-27<br/>Summerville, GA 30747</p>
           <p className="mb-4 text-gray-300">
             <a href="tel:7068080110" className="hover:text-yellow-gold transition-colors">(706) 808-0110</a>
