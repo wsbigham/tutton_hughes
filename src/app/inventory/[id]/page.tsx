@@ -131,8 +131,8 @@ export default function VehicleDetailPage() {
                onClick={() => openLightbox(currentImageIndex === -1 ? 0 : currentImageIndex)}
              >
                <div className="absolute inset-0 bg-cover bg-center transition-all duration-300" style={{ backgroundImage: `url(${mainImage || vehicle.images[0]})` }}></div>
-               <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all flex items-center justify-center">
-                 <div className="bg-midnight-blue bg-opacity-80 text-white rounded-full px-6 py-3 opacity-0 group-hover:opacity-100 transition-opacity transform scale-90 group-hover:scale-100 flex items-center gap-2 shadow-lg">
+               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all flex items-center justify-center">
+                 <div className="bg-midnight-blue/80 text-white rounded-full px-6 py-3 opacity-0 group-hover:opacity-100 transition-opacity transform scale-90 group-hover:scale-100 flex items-center gap-2 shadow-lg">
                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
                    <span className="font-bold tracking-wide">View Gallery</span>
                  </div>
@@ -208,7 +208,7 @@ export default function VehicleDetailPage() {
             <div className="mt-auto flex flex-col sm:flex-row gap-4">
               <a
                 href="tel:7068080110"
-                className="flex-grow bg-midnight-blue text-white text-center font-black py-4 rounded-lg hover:bg-opacity-90 transition-all shadow-lg"
+                className="flex-grow bg-midnight-blue text-white text-center font-black py-4 rounded-lg hover:bg-midnight-blue/90 transition-all shadow-lg"
               >                Call for Price / Test Drive
               </a>
               <Link 
@@ -225,11 +225,11 @@ export default function VehicleDetailPage() {
       {/* Lightbox Modal */}
       {lightboxIndex !== null && vehicle.images && (
         <div 
-          className="fixed inset-0 z-[100] bg-black bg-opacity-95 flex items-center justify-center backdrop-blur-sm"
+          className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center backdrop-blur-sm"
           onClick={closeLightbox}
         >
           <button 
-            className="absolute top-6 right-6 text-white hover:text-yellow-gold transition-colors z-[110] bg-black bg-opacity-50 hover:bg-opacity-80 rounded-full p-2"
+            className="absolute top-6 right-6 text-white hover:text-yellow-gold transition-colors z-[110] bg-black/50 hover:bg-black/80 rounded-full p-2"
             onClick={closeLightbox}
             aria-label="Close lightbox"
           >
@@ -238,7 +238,7 @@ export default function VehicleDetailPage() {
           
           {vehicle.images.length > 1 && (
             <button 
-              className="absolute left-4 sm:left-8 top-1/2 transform -translate-y-1/2 text-white hover:text-yellow-gold transition-colors z-[110] bg-black bg-opacity-50 hover:bg-opacity-80 rounded-full p-3 sm:p-4"
+              className="absolute left-4 sm:left-8 top-1/2 transform -translate-y-1/2 text-white hover:text-yellow-gold transition-colors z-[110] bg-black/50 hover:bg-black/80 rounded-full p-3 sm:p-4"
               onClick={prevImage}
               aria-label="Previous image"
             >
@@ -257,7 +257,7 @@ export default function VehicleDetailPage() {
 
           {vehicle.images.length > 1 && (
             <button 
-              className="absolute right-4 sm:right-8 top-1/2 transform -translate-y-1/2 text-white hover:text-yellow-gold transition-colors z-[110] bg-black bg-opacity-50 hover:bg-opacity-80 rounded-full p-3 sm:p-4"
+              className="absolute right-4 sm:right-8 top-1/2 transform -translate-y-1/2 text-white hover:text-yellow-gold transition-colors z-[110] bg-black/50 hover:bg-black/80 rounded-full p-3 sm:p-4"
               onClick={nextImage}
               aria-label="Next image"
             >
@@ -266,7 +266,7 @@ export default function VehicleDetailPage() {
           )}
 
           {vehicle.images.length > 1 && (
-            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white text-sm sm:text-base font-semibold bg-black bg-opacity-60 px-6 py-2 rounded-full tracking-widest backdrop-blur-md z-[110]">
+            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white text-sm sm:text-base font-semibold bg-black/60 px-6 py-2 rounded-full tracking-widest backdrop-blur-md z-[110]">
               {lightboxIndex + 1} / {vehicle.images.length}
             </div>
           )}
