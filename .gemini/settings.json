@@ -1,0 +1,18 @@
+{
+  "general": {
+    "defaultApprovalMode": "auto_edit",
+    "vimMode": true,
+    "enableNotifications": true,
+    "plan": {
+      "modelRouting": false
+    }
+  },
+  "ui": {
+    "inlineThinkingMode": "off",
+    "showStatusInTitle": true,
+    "escapePastedAtSymbols": true,
+    "showMemoryUsage": true,
+    "useAlternateBuffer": true,
+    "showSpinner": true
+  }
+}
