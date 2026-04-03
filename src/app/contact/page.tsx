@@ -101,7 +101,7 @@ export default function ContactPage() {
             {/* Google Map */}
             <div className="h-80 bg-gray-300 rounded-xl overflow-hidden relative shadow-md">
                <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.144414436856!2d-85.35122142339591!3d34.60055557295804!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x886026a76c8c9985%3A0x6b776c533967d3!2s12940%20US-27%2C%20Summerville%2C%20GA%2030747!5e0!3m2!1sen!2sus!4v1712110000000!5m2!1sen!2sus" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3287.5398500914184!2d-85.3189312!3d34.5145482!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x886023d15e04965d%3A0xe59ea66b7c8f1c36!2sTutton%20Hughes%20Auto%20Sales%20LLC!5e0!3m2!1sen!2sus!4v1775252950588!5m2!1sen!2sus" 
                 width="100%" 
                 height="100%" 
                 style={{ border: 0 }} 
