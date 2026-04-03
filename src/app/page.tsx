@@ -1,6 +1,13 @@
+"use client";
+
 import Link from "next/link";
+import { useVehicles } from "@/hooks/useVehicles";
 
 export default function Home() {
+  const { vehicles, loading } = useVehicles();
+  const featuredVehicles = vehicles.filter(v => v.featured).slice(0, 3);
+  const displayVehicles = featuredVehicles.length > 0 ? featuredVehicles : vehicles.slice(0, 3);
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
@@ -36,7 +43,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Vehicles Section (Placeholder for CMS Data) */}
+      {/* Featured Vehicles Section */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-end mb-10">
@@ -50,62 +57,31 @@ export default function Home() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Mock Vehicle Card 1 */}
-            <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-xl">
-              <div className="h-48 bg-gray-300 relative">
-                 <div className="absolute inset-0 flex items-center justify-center text-gray-500">
-                    [Vehicle Image Placeholder]
-                 </div>
+            {loading ? (
+              <div className="col-span-full flex justify-center py-12">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-midnight-blue"></div>
               </div>
-              <div className="p-6">
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-xl font-bold text-gray-900">2021 Ford F-150 XLT</h3>
-                  <span className="bg-midnight-blue text-white text-sm font-bold px-2 py-1 rounded">$34,500</span>
+            ) : displayVehicles.length === 0 ? (
+              <p className="text-gray-500 text-center col-span-full py-12">No featured vehicles at the moment.</p>
+            ) : (
+              displayVehicles.map((vehicle) => (
+                <div key={vehicle.id} className="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-xl">
+                  <div className="h-48 bg-gray-300 relative group overflow-hidden">
+                     <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style={{ backgroundImage: `url(${vehicle.images[0]})` }}></div>
+                  </div>
+                  <div className="p-6">
+                    <div className="flex justify-between items-start mb-2">
+                      <h3 className="text-xl font-bold text-gray-900">{vehicle.year} {vehicle.make} {vehicle.model}</h3>
+                      <span className="bg-midnight-blue text-white text-sm font-bold px-2 py-1 rounded">${vehicle.price.toLocaleString()}</span>
+                    </div>
+                    <p className="text-gray-600 mb-4">{vehicle.mileage.toLocaleString()} miles &bull; {vehicle.status}</p>
+                    <Link href={`/inventory/${vehicle.id}`} className="block w-full text-center bg-gray-100 hover:bg-gray-200 text-midnight-blue font-semibold py-2 rounded transition-colors">
+                      View Details
+                    </Link>
+                  </div>
                 </div>
-                <p className="text-gray-600 mb-4">42,000 miles &bull; 4WD &bull; Automatic</p>
-                <Link href="/inventory" className="block w-full text-center bg-gray-100 hover:bg-gray-200 text-midnight-blue font-semibold py-2 rounded transition-colors">
-                  View Details
-                </Link>
-              </div>
-            </div>
-
-             {/* Mock Vehicle Card 2 */}
-             <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-xl">
-              <div className="h-48 bg-gray-300 relative">
-                 <div className="absolute inset-0 flex items-center justify-center text-gray-500">
-                    [Vehicle Image Placeholder]
-                 </div>
-              </div>
-              <div className="p-6">
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-xl font-bold text-gray-900">2019 Toyota Camry SE</h3>
-                  <span className="bg-midnight-blue text-white text-sm font-bold px-2 py-1 rounded">$18,900</span>
-                </div>
-                <p className="text-gray-600 mb-4">65,000 miles &bull; FWD &bull; Automatic</p>
-                <Link href="/inventory" className="block w-full text-center bg-gray-100 hover:bg-gray-200 text-midnight-blue font-semibold py-2 rounded transition-colors">
-                  View Details
-                </Link>
-              </div>
-            </div>
-
-            {/* Mock Vehicle Card 3 */}
-            <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-xl">
-              <div className="h-48 bg-gray-300 relative">
-                 <div className="absolute inset-0 flex items-center justify-center text-gray-500">
-                    [Vehicle Image Placeholder]
-                 </div>
-              </div>
-              <div className="p-6">
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-xl font-bold text-gray-900">2020 Honda CR-V EX</h3>
-                  <span className="bg-midnight-blue text-white text-sm font-bold px-2 py-1 rounded">$23,400</span>
-                </div>
-                <p className="text-gray-600 mb-4">38,000 miles &bull; AWD &bull; Automatic</p>
-                <Link href="/inventory" className="block w-full text-center bg-gray-100 hover:bg-gray-200 text-midnight-blue font-semibold py-2 rounded transition-colors">
-                  View Details
-                </Link>
-              </div>
-            </div>
+              ))
+            )}
           </div>
           
           <div className="mt-8 text-center sm:hidden">

@@ -6,6 +6,7 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
+import { convertToWebP, uploadImageToStorage } from "@/lib/imageUtils";
 
 export default function AddVehiclePage() {
   const { loading: authLoading } = useAuth();
@@ -20,22 +21,59 @@ export default function AddVehiclePage() {
     vin: "",
     description: "",
     features: "",
-    imageUrl: "", // Simplified for now, in real app would be file upload
     status: "available",
     featured: false
   });
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [previewUrls, setPreviewUrls] = useState<string[]>([]);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const files = Array.from(e.target.files);
+      setSelectedFiles(prev => [...prev, ...files]);
+      
+      // Create preview URLs
+      const newPreviews = files.map(file => URL.createObjectURL(file));
+      setPreviewUrls(prev => [...prev, ...newPreviews]);
+    }
+  };
+
+  const removeFile = (index: number) => {
+    setSelectedFiles(prev => prev.filter((_, i) => i !== index));
+    setPreviewUrls(prev => {
+      const urls = [...prev];
+      URL.revokeObjectURL(urls[index]);
+      return urls.filter((_, i) => i !== index);
+    });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     try {
+      const uploadedImageUrls: string[] = [];
+
+      for (let i = 0; i < selectedFiles.length; i++) {
+        const file = selectedFiles[i];
+        // Convert to WebP
+        const webpBlob = await convertToWebP(file, 0.8);
+        // Upload to Storage
+        const path = `vehicles/${Date.now()}_${i}.webp`;
+        const url = await uploadImageToStorage(webpBlob, path);
+        uploadedImageUrls.push(url);
+      }
+
+      const imagesToSave = uploadedImageUrls.length > 0 
+        ? uploadedImageUrls 
+        : ["https://placehold.co/800x600?text=Vehicle+Image"];
+
       await addDoc(collection(db, "vehicles"), {
         ...formData,
         year: Number(formData.year),
         price: Number(formData.price),
         mileage: Number(formData.mileage),
         features: formData.features.split(",").map(f => f.trim()).filter(f => f !== ""),
-        images: [formData.imageUrl || "https://placehold.co/800x600?text=Vehicle+Image"],
+        images: imagesToSave,
         createdAt: serverTimestamp()
       });
       router.push("/admin");
@@ -93,8 +131,30 @@ export default function AddVehiclePage() {
             </div>
 
             <div>
-              <label className="block text-xs font-black text-midnight-blue uppercase tracking-widest mb-2">Image URL</label>
-              <input type="text" name="imageUrl" value={formData.imageUrl} onChange={handleChange} className="w-full px-4 py-3 border-2 border-gray-100 rounded-lg focus:border-yellow-gold outline-none transition-colors text-black" placeholder="https://..." />
+              <label className="block text-xs font-black text-midnight-blue uppercase tracking-widest mb-2">Images</label>
+              <input 
+                type="file" 
+                accept="image/*" 
+                multiple 
+                onChange={handleFileChange} 
+                className="w-full px-4 py-3 border-2 border-gray-100 rounded-lg focus:border-yellow-gold outline-none transition-colors text-black bg-gray-50"
+              />
+              {previewUrls.length > 0 && (
+                <div className="mt-4 flex gap-4 overflow-x-auto pb-2">
+                  {previewUrls.map((url, idx) => (
+                    <div key={idx} className="relative w-24 h-24 flex-shrink-0 rounded overflow-hidden border border-gray-200">
+                      <div className="w-full h-full bg-cover bg-center" style={{ backgroundImage: `url(${url})` }}></div>
+                      <button 
+                        type="button" 
+                        onClick={() => removeFile(idx)}
+                        className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold"
+                      >
+                        &times;
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             <div>

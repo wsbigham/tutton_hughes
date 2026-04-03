@@ -6,6 +6,7 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useRouter, useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { convertToWebP, uploadImageToStorage } from "@/lib/imageUtils";
 
 export default function EditVehiclePage() {
   const { loading: authLoading } = useAuth();
@@ -22,10 +23,13 @@ export default function EditVehiclePage() {
     vin: "",
     description: "",
     features: "",
-    imageUrl: "",
     status: "available",
     featured: false
   });
+  
+  const [existingImages, setExistingImages] = useState<string[]>([]);
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [previewUrls, setPreviewUrls] = useState<string[]>([]);
 
   useEffect(() => {
     async function fetchVehicle() {
@@ -44,10 +48,12 @@ export default function EditVehiclePage() {
             vin: data.vin || "",
             description: data.description || "",
             features: data.features ? data.features.join(", ") : "",
-            imageUrl: data.images ? data.images[0] : "",
             status: data.status || "available",
             featured: data.featured || false
           });
+          if (data.images) {
+            setExistingImages(data.images);
+          }
         }
       } catch (err) {
         console.error("Error fetching vehicle:", err);
@@ -58,17 +64,55 @@ export default function EditVehiclePage() {
     fetchVehicle();
   }, [id]);
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const files = Array.from(e.target.files);
+      setSelectedFiles(prev => [...prev, ...files]);
+      
+      const newPreviews = files.map(file => URL.createObjectURL(file));
+      setPreviewUrls(prev => [...prev, ...newPreviews]);
+    }
+  };
+
+  const removeExistingImage = (index: number) => {
+    setExistingImages(prev => prev.filter((_, i) => i !== index));
+  };
+
+  const removeNewFile = (index: number) => {
+    setSelectedFiles(prev => prev.filter((_, i) => i !== index));
+    setPreviewUrls(prev => {
+      const urls = [...prev];
+      URL.revokeObjectURL(urls[index]);
+      return urls.filter((_, i) => i !== index);
+    });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
     try {
+      const uploadedImageUrls: string[] = [];
+
+      // Upload new files
+      for (let i = 0; i < selectedFiles.length; i++) {
+        const file = selectedFiles[i];
+        const webpBlob = await convertToWebP(file, 0.8);
+        const path = `vehicles/${Date.now()}_${i}.webp`;
+        const url = await uploadImageToStorage(webpBlob, path);
+        uploadedImageUrls.push(url);
+      }
+
+      // Combine existing images with newly uploaded ones
+      const allImages = [...existingImages, ...uploadedImageUrls];
+      const imagesToSave = allImages.length > 0 ? allImages : ["https://placehold.co/800x600?text=Vehicle+Image"];
+
       await updateDoc(doc(db, "vehicles", id as string), {
         ...formData,
         year: Number(formData.year),
         price: Number(formData.price),
         mileage: Number(formData.mileage),
         features: formData.features.split(",").map(f => f.trim()).filter(f => f !== ""),
-        images: [formData.imageUrl || "https://placehold.co/800x600?text=Vehicle+Image"]
+        images: imagesToSave
       });
       router.push("/admin");
     } catch (err) {
@@ -129,8 +173,47 @@ export default function EditVehiclePage() {
             </div>
 
             <div>
-              <label className="block text-xs font-black text-midnight-blue uppercase tracking-widest mb-2">Image URL</label>
-              <input type="text" name="imageUrl" value={formData.imageUrl} onChange={handleChange} className="w-full px-4 py-3 border-2 border-gray-100 rounded-lg focus:border-yellow-gold outline-none transition-colors text-black" />
+              <label className="block text-xs font-black text-midnight-blue uppercase tracking-widest mb-2">Images</label>
+              
+              {(existingImages.length > 0 || previewUrls.length > 0) && (
+                <div className="mb-4 flex gap-4 overflow-x-auto pb-2">
+                  {/* Existing Images */}
+                  {existingImages.map((url, idx) => (
+                    <div key={`existing-${idx}`} className="relative w-24 h-24 flex-shrink-0 rounded overflow-hidden border border-gray-200">
+                      <div className="w-full h-full bg-cover bg-center" style={{ backgroundImage: `url(${url})` }}></div>
+                      <button 
+                        type="button" 
+                        onClick={() => removeExistingImage(idx)}
+                        className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold"
+                      >
+                        &times;
+                      </button>
+                    </div>
+                  ))}
+
+                  {/* New Image Previews */}
+                  {previewUrls.map((url, idx) => (
+                    <div key={`new-${idx}`} className="relative w-24 h-24 flex-shrink-0 rounded overflow-hidden border-2 border-dashed border-green-400">
+                      <div className="w-full h-full bg-cover bg-center" style={{ backgroundImage: `url(${url})` }}></div>
+                      <button 
+                        type="button" 
+                        onClick={() => removeNewFile(idx)}
+                        className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold"
+                      >
+                        &times;
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              <input 
+                type="file" 
+                accept="image/*" 
+                multiple 
+                onChange={handleFileChange} 
+                className="w-full px-4 py-3 border-2 border-gray-100 rounded-lg focus:border-yellow-gold outline-none transition-colors text-black bg-gray-50"
+              />
             </div>
 
             <div>

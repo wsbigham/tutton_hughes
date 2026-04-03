@@ -12,6 +12,7 @@ export default function VehicleDetailPage() {
   const [vehicle, setVehicle] = useState<Vehicle | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [mainImage, setMainImage] = useState<string>("");
 
   useEffect(() => {
     async function fetchVehicle() {
@@ -21,7 +22,11 @@ export default function VehicleDetailPage() {
         const docRef = doc(db, 'vehicles', id as string);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-          setVehicle({ id: docSnap.id, ...docSnap.data() } as Vehicle);
+          const v = { id: docSnap.id, ...docSnap.data() } as Vehicle;
+          setVehicle(v);
+          if (v.images && v.images.length > 0) {
+            setMainImage(v.images[0]);
+          }
         } else {
           setError("Vehicle not found");
         }
@@ -69,16 +74,21 @@ export default function VehicleDetailPage() {
           {/* Left Side: Images */}
           <div className="bg-gray-200">
              <div className="h-96 sm:h-[500px] relative">
-               <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${vehicle.images[0]})` }}></div>
+               <div className="absolute inset-0 bg-cover bg-center transition-all duration-300" style={{ backgroundImage: `url(${mainImage || vehicle.images[0]})` }}></div>
              </div>
-             {/* Simple Gallery Placeholder */}
-             <div className="p-4 flex gap-4 overflow-x-auto">
-                {vehicle.images.map((img, idx) => (
-                  <div key={idx} className="w-24 h-20 flex-shrink-0 bg-gray-300 rounded overflow-hidden shadow-sm">
-                    <div className="w-full h-full bg-cover bg-center" style={{ backgroundImage: `url(${img})` }}></div>
-                  </div>
-                ))}
-             </div>
+             {vehicle.images && vehicle.images.length > 1 && (
+               <div className="p-4 flex gap-4 overflow-x-auto">
+                  {vehicle.images.map((img, idx) => (
+                    <button 
+                      key={idx}
+                      onClick={() => setMainImage(img)}
+                      className={`w-24 h-20 flex-shrink-0 bg-gray-300 rounded overflow-hidden shadow-sm border-2 transition-all ${mainImage === img ? 'border-midnight-blue opacity-100' : 'border-transparent opacity-70 hover:opacity-100'}`}
+                    >
+                      <div className="w-full h-full bg-cover bg-center" style={{ backgroundImage: `url(${img})` }}></div>
+                    </button>
+                  ))}
+               </div>
+             )}
           </div>
 
           {/* Right Side: Info */}
