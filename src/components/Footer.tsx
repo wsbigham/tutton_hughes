@@ -7,8 +7,8 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Dealership Info */}
         <div>
-          <div className="flex items-center gap-3 mb-4">
-            <div className="relative w-12 h-12 shrink-0">
+          <div className="flex items-center gap-4 mb-4">
+            <div className="relative w-24 h-24 shrink-0">
               <Image
                 src="/tutton_hughes_logo.png"
                 alt="Tutton Hughes Auto Sales Logo"
