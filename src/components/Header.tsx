@@ -12,11 +12,11 @@ export default function Header() {
   return (
     <header className="bg-midnight-blue text-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-24">
+        <div className="flex justify-between items-center h-28 sm:h-32">
           {/* Logo Area */}
           <div className="flex-shrink-0 flex items-center">
-            <Link href="/" className="flex items-center gap-3">
-              <div className="relative w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-full p-1 overflow-hidden">
+            <Link href="/" className="flex items-center gap-4">
+              <div className="relative w-[86px] h-[86px] sm:w-[108px] sm:h-[108px]">
                 <Image
                   src="/tutton_hughes_logo.png"
                   alt="Tutton & Hughes Auto Sales Logo"
@@ -26,8 +26,8 @@ export default function Header() {
                 />
               </div>
               <div className="hidden sm:block">
-                <h1 className="text-xl font-bold uppercase tracking-wider text-yellow-gold leading-none mb-1">Tutton & Hughes</h1>
-                <p className="text-sm font-medium tracking-wide leading-none opacity-80">Auto Sales LLC</p>
+                <h1 className="text-2xl font-black uppercase tracking-wider text-yellow-gold leading-none mb-1">Tutton & Hughes</h1>
+                <p className="text-base font-medium tracking-wide leading-none opacity-80">Auto Sales LLC</p>
               </div>
             </Link>
           </div>
