@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useVehicles } from "@/hooks/useVehicles";
 
 export default function Home() {
@@ -12,12 +13,25 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
       <section className="relative bg-midnight-blue text-white overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="https://d3imlwtjjinwvd.cloudfront.net/assets/building.png"
+            alt="Tutton Hughes Auto Sales Building"
+            fill
+            className="object-cover object-center"
+            priority
+          />
+          {/* Dark Overlay */}
+          <div className="absolute inset-0 bg-midnight-blue/70"></div>
+        </div>
+
         {/* Abstract background shape for visual appeal */}
-        <div className="absolute inset-0 opacity-20">
+        <div className="absolute inset-0 opacity-20 z-0">
           <div className="absolute top-0 -left-1/4 w-1/2 h-full bg-yellow-gold transform skew-x-12"></div>
         </div>
         
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
           <div className="md:w-2/3">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
               Find Your Perfect <span className="text-yellow-gold">Pre-Owned Vehicle</span> Today
