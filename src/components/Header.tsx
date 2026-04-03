@@ -51,10 +51,10 @@ export default function Header() {
           {/* Contact CTA */}
           <div className="hidden lg:flex items-center">
             <a
-              href="tel:4706491117"
+              href="tel:7068080110"
               className="bg-yellow-gold text-midnight-blue hover:bg-gold-hover px-6 py-3 rounded-md font-black transition-all shadow-md active:transform active:scale-95"
             >
-              (470) 649-1117
+              (706) 808-0110
             </a>
           </div>
 

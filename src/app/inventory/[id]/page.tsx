@@ -144,11 +144,10 @@ export default function VehicleDetailPage() {
             </div>
 
             <div className="mt-auto flex flex-col sm:flex-row gap-4">
-              <a 
-                href="tel:7062532277" 
+              <a
+                href="tel:7068080110"
                 className="flex-grow bg-midnight-blue text-white text-center font-black py-4 rounded-lg hover:bg-opacity-90 transition-all shadow-lg"
-              >
-                Call for Price / Test Drive
+              >                Call for Price / Test Drive
               </a>
               <Link 
                 href="/contact"
