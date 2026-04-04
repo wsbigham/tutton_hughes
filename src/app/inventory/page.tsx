@@ -40,18 +40,18 @@ export default function InventoryPage() {
           ) : (
             vehicles.map((vehicle) => (
               <div key={vehicle.id} className="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-xl">
-                <div className="h-56 bg-gray-300 relative group overflow-hidden">
+                <Link href={`/inventory/${vehicle.id}`} className="h-56 bg-gray-300 relative group overflow-hidden block">
                    {/* In a real app, use next/image with the image URL */}
                    <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style={{ backgroundImage: `url(${vehicle.images[0]})` }}></div>
-                   <div className="absolute top-4 right-4 bg-midnight-blue text-white font-bold px-3 py-1 rounded">
+                   <div className="absolute top-4 right-4 bg-midnight-blue text-white font-bold px-3 py-1 rounded shadow-md z-10">
                       ${vehicle.price.toLocaleString()}
                    </div>
                    {vehicle.featured && (
-                     <div className="absolute top-4 left-4 bg-yellow-gold text-midnight-blue font-bold px-3 py-1 rounded">
+                     <div className="absolute top-4 left-4 bg-yellow-gold text-midnight-blue font-bold px-3 py-1 rounded shadow-md z-10">
                        Featured
                      </div>
                    )}
-                </div>
+                </Link>
                 <div className="p-6">
                   <h3 className="text-2xl font-bold text-midnight-blue mb-2">
                     {vehicle.year} {vehicle.make} {vehicle.model}

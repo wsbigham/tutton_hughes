@@ -87,9 +87,9 @@ export default function Home() {
             ) : (
               displayVehicles.map((vehicle) => (
                 <div key={vehicle.id} className="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-xl">
-                  <div className="h-48 bg-gray-300 relative group overflow-hidden">
+                  <Link href={`/inventory/${vehicle.id}`} className="h-48 bg-gray-300 relative group overflow-hidden block">
                      <div className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style={{ backgroundImage: `url(${vehicle.images[0]})` }}></div>
-                  </div>
+                  </Link>
                   <div className="p-6">
                     <div className="flex justify-between items-start mb-2">
                       <h3 className="text-xl font-bold text-gray-900">{vehicle.year} {vehicle.make} {vehicle.model}</h3>
