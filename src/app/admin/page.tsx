@@ -1,19 +1,28 @@
 "use client";
 
 import { useAuth } from "@/hooks/useAuth";
-import { useVehicles, Vehicle } from "@/hooks/useVehicles";
+import { useVehicles } from "@/hooks/useVehicles";
+import { Vehicle } from "@/types/vehicle";
 import { useSettings } from "@/hooks/useSettings";
 import { db, auth } from "@/lib/firebase";
 import { doc, deleteDoc } from "firebase/firestore";
 import { signOut } from "firebase/auth";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function AdminDashboard() {
   const { user, loading: authLoading } = useAuth();
   const { vehicles, loading: vehiclesLoading, error } = useVehicles();
   const { settings, loading: settingsLoading, updateSettings } = useSettings();
   const [isDeleting, setIsDeleting] = useState<string | null>(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!authLoading && !user) {
+      router.push("/login");
+    }
+  }, [user, authLoading, router]);
 
   const handleLogout = async () => {
     await signOut(auth);
@@ -33,7 +42,7 @@ export default function AdminDashboard() {
     }
   };
 
-  if (authLoading || vehiclesLoading || settingsLoading) {
+  if (authLoading || vehiclesLoading || settingsLoading || !user) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-midnight-blue"></div>

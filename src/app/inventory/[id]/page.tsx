@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { db } from "@/lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
-import { Vehicle } from "@/hooks/useVehicles";
+import { Vehicle } from "@/types/vehicle";
 import Link from "next/link";
 import Image from "next/image";
 

@@ -4,12 +4,12 @@ import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCMlU6f67d_UUaqkkxE37x6WX4oCXjCBfA",
-  authDomain: "tutton-hughes-auto-sales-1234.firebaseapp.com",
-  projectId: "tutton-hughes-auto-sales-1234",
-  storageBucket: "tutton-hughes-auto-sales-1234.firebasestorage.app",
-  messagingSenderId: "155311913812",
-  appId: "1:155311913812:web:34c13b31396267b46fe6c1"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
 };
 
 // Initialize Firebase for SSR and Client-side

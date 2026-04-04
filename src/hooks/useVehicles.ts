@@ -1,24 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { db } from "@/lib/firebase";
-import { collection, query, getDocs, orderBy, Timestamp } from "firebase/firestore";
-
-export interface Vehicle {
-  id: string;
-  make: string;
-  model: string;
-  year: number;
-  price: number;
-  mileage: number;
-  vin: string;
-  description: string;
-  features: string[];
-  images: string[];
-  status: string;
-  featured: boolean;
-  createdAt: Timestamp;
-}
+import { Vehicle } from "@/types/vehicle";
+import { getVehicles } from "@/services/vehicleService";
 
 export function useVehicles() {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
@@ -29,13 +13,7 @@ export function useVehicles() {
     async function fetchVehicles() {
       try {
         setLoading(true);
-        const vehiclesCol = collection(db, 'vehicles');
-        const q = query(vehiclesCol, orderBy('createdAt', 'desc'));
-        const snapshot = await getDocs(q);
-        const data = snapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        })) as Vehicle[];
+        const data = await getVehicles();
         setVehicles(data);
       } catch (err: unknown) {
         console.error("Error fetching vehicles:", err);

@@ -14,5 +14,10 @@
     "showMemoryUsage": true,
     "useAlternateBuffer": true,
     "showSpinner": true
+  },
+  "skills": {
+    "disabled": [
+      "code-reviewer"
+    ]
   }
 }

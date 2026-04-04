@@ -4,12 +4,12 @@ import { useAuth } from "@/hooks/useAuth";
 import { db } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { convertToWebP, uploadImageToStorage } from "@/lib/imageUtils";
 
 export default function AddVehiclePage() {
-  const { loading: authLoading } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -26,6 +26,12 @@ export default function AddVehiclePage() {
   });
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (!authLoading && !user) {
+      router.push("/login");
+    }
+  }, [user, authLoading, router]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -91,7 +97,7 @@ export default function AddVehiclePage() {
     setFormData(prev => ({ ...prev, [name]: val }));
   };
 
-  if (authLoading) return null;
+  if (authLoading || !user) return null;
 
   return (
     <div className="min-h-screen bg-gray-100 py-12">

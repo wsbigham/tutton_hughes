@@ -9,7 +9,7 @@ import Link from "next/link";
 import { convertToWebP, uploadImageToStorage } from "@/lib/imageUtils";
 
 export default function EditVehiclePage() {
-  const { loading: authLoading } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const router = useRouter();
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
@@ -30,6 +30,12 @@ export default function EditVehiclePage() {
   const [existingImages, setExistingImages] = useState<string[]>([]);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (!authLoading && !user) {
+      router.push("/login");
+    }
+  }, [user, authLoading, router]);
 
   useEffect(() => {
     async function fetchVehicle() {
@@ -129,7 +135,7 @@ export default function EditVehiclePage() {
     setFormData(prev => ({ ...prev, [name]: val }));
   };
 
-  if (authLoading || loading) return (
+  if (authLoading || loading || !user) return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-midnight-blue"></div>
     </div>

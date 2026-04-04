@@ -34,6 +34,7 @@ export function useSettings() {
   }, []);
 
   const updateSettings = async (newSettings: Partial<SiteSettings>) => {
+    const previousSettings = settings;
     const updated = { ...settings, ...newSettings };
     setSettings(updated); // Optimistic update
     try {
@@ -41,7 +42,7 @@ export function useSettings() {
       await setDoc(docRef, updated, { merge: true });
     } catch (err) {
       console.error("Error updating settings:", err);
-      // Revert optimistic update on failure would be ideal, but for simplicity we throw
+      setSettings(previousSettings); // Revert optimistic update on failure
       throw err;
     }
   };
